@@ -22,7 +22,8 @@ app.get("/login", (req, res) => {
 app.get("/login/board", (req, res) => {
     res.redirect("/login");
 });
-app.listen(6060, () => {
-    console.log("Server is listening at port 6060");
+
+app.listen(6000, () => {
+    console.log("Server is listening at port 6000");
 });
 //# sourceMappingURL=index.js.map
