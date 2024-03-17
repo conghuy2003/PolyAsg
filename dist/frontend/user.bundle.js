@@ -12,9 +12,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controllers_UserController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controllers/UserController */ "./src/frontend/controllers/UserController.ts");
 
 const appElement = document.querySelector('#app');
-console.log('login form');
+console.log('login form'); /// hien thi thong tin login 
 if (appElement) {
-    let usercontroller = new _controllers_UserController__WEBPACK_IMPORTED_MODULE_0__.UserController(appElement);
+    let usercontroller = new _controllers_UserController__WEBPACK_IMPORTED_MODULE_0__.UserController(appElement); /// ton tai doi tuong
 }
 
 
@@ -42,21 +42,24 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+///xử lí sự kiện khi  vào playgame
 class UserController {
     constructor(element) {
         this.element = element;
         const button = element.querySelector('#play');
         console.log('UserController constructor');
+        /// phương thức xử lí sự kiện khi click button 
         button === null || button === void 0 ? void 0 : button.addEventListener('click', this.processPlayButtonClick);
     }
     processPlayButtonClick(event) {
-        event.preventDefault();
+        event.preventDefault(); /// ngăn cách pthuc xử lí sự kiện ngầm định của nút
         console.log('event...');
         const form = this.element.querySelector('form');
         const usernameElement = this.element.querySelector('#username');
         const helpId = this.element.querySelector('#UsernameHelpId');
         if (usernameElement) {
-            let user = new _models_User__WEBPACK_IMPORTED_MODULE_0__.User(usernameElement.value);
+            let user = new _models_User__WEBPACK_IMPORTED_MODULE_0__.User(usernameElement.value); //tồn tại user  và tạo raa dodtuong user truyen vao giá trị khi người dùng input
+            ///cho phép kiểm tra ràng buộc dữ liệu user
             (0,class_validator__WEBPACK_IMPORTED_MODULE_2__.validate)(user).then(errors => {
                 if (errors.length > 0) {
                     if (helpId) {

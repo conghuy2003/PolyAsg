@@ -78,6 +78,7 @@ class GameController {
             id++;
         });
     }
+    ///được gọi khi người dùng reset, 
     reinitGame() {
         this.items.forEach(item => {
             item.imageElement = null;
@@ -86,9 +87,11 @@ class GameController {
         });
         this.shuffle();
     }
+    ///kiểm tra người dùng win game
     isWinGame() {
         return this.items.filter(item => item.status === _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItemStatus.Open).length === this.items.length;
     }
+    ///hiểm thị giao diện
     renderHTML(rootElement, item) {
         //     <div class="col-2 gameItem m-2 p1 text-center">
         //     <img src="images/1.png" width="100px" alt="" class="img-fluid">
@@ -99,17 +102,19 @@ class GameController {
         divItem.addEventListener('click', this.processGameItemClicked);
         const imgItem = document.createElement('img');
         imgItem.src = `images/${item.image}`;
-        imgItem.className = 'img-fluid invisible';
+        imgItem.className = 'img-fluid invisible'; /// ẩn click vào sẽ hiện
         item.imageElement = imgItem;
         divItem.appendChild(imgItem);
         rootElement.appendChild(divItem);
     }
+    //hiển thị nút nhấn trong game
     rederResetButton(rootElement) {
         let button = rootElement.querySelector('button#reset');
         if (button) {
             button.addEventListener('click', this.processResetButtonClick);
         }
     }
+    ///hiển thị toàn bộ ndung game
     renderGameBoard() {
         this.shuffle();
         let boardDiv = this.element.querySelector('#board');
@@ -117,9 +122,10 @@ class GameController {
             this.items.forEach(it => {
                 this.renderHTML(boardDiv, it);
             });
-            this.rederResetButton(this.element);
+            this.rederResetButton(this.element); /// hien thi thong tin cho phep choi lai gamme
         }
     }
+    //kiểm tra tp id đưa vào trùn khớp trạng thái mở kh trùng khớp hiện thị đóng
     isMatched(id, imgElement) {
         let openedItems = this.items.filter(item => {
             if (item.status === _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItemStatus.Open && !item.isMatched) {
@@ -128,13 +134,16 @@ class GameController {
         });
         if (openedItems.length == 2) {
             let checkMatchedFilter = openedItems.filter(item => item.id == id);
-            if (checkMatchedFilter.length < 2) {
+            if (checkMatchedFilter.length < 2) 
+            /// thay đổi màu nền kh được giống nhau
+            {
                 openedItems.forEach(item => {
                     this.changeMatchedBackground(item.imageElement, false);
                 });
                 setTimeout(() => openedItems.forEach(item => {
                     if (item.imageElement) {
                         item.imageElement.className = 'img-fluid invisible';
+                        /// xoa mau nen truoc khi an di
                         item.status = _models_GameItem__WEBPACK_IMPORTED_MODULE_1__.GameItemStatus.Close;
                         item.isMatched = false;
                         this.changeMatchedBackground(item.imageElement);
@@ -143,7 +152,7 @@ class GameController {
             }
             else {
                 openedItems.forEach(item => {
-                    item.isMatched = true;
+                    item.isMatched = true; /// danh dau tp giong nhau
                     this.changeMatchedBackground(item.imageElement);
                 });
                 return true;
@@ -152,6 +161,7 @@ class GameController {
         }
         return false;
     }
+    /// thayd đổi màu nền kh đúng hiện sau đó ẩn sau vài giây
     changeMatchedBackground(imgElement, isMatched = true) {
         if (imgElement === null || imgElement === void 0 ? void 0 : imgElement.parentElement) {
             if (isMatched) {
@@ -224,6 +234,7 @@ class GameItem {
         this.imageElement = imageElement;
     }
 }
+/// nhap thong tin luu hinh anh trang thai
 
 
 /***/ })

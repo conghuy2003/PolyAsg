@@ -19,6 +19,9 @@ app.get("/board", (req, res) => {
 app.get("/login", (req, res) => {
     res.render('login', {});
 });
+app.get("/login/board", (req, res) => {
+    res.redirect("/login");
+});
 app.listen(6060, () => {
     console.log("Server is listening at port 6060");
 });
